@@ -45,7 +45,7 @@ function selectSchools() {
   }
   for( i =0; i < model.length;i++) {
       $(".row-" + model[i].xcoordinate + "-column-" + model[i].ycoordinate + "").append("<p>"+model[i].population+"</p>");
-      console.log(".row-" + model[i].xcoordinate + "-column-" + model[i].ycoordinate + "");
+      //console.log(".row-" + model[i].xcoordinate + "-column-" + model[i].ycoordinate + "");
   }
 }
 
@@ -125,7 +125,6 @@ function assignPopToSchool() {
 
 
     if(tie.length != 0) {
-      console.log(tie.length);
       for(k = 0; k < tie.length; k++) {
         if(tie[k] < temp) {
           distanceTied.push(i);
@@ -154,6 +153,7 @@ function census() {
       schoolPop[model[i].assignedTo]  += model[i].population;
     }
   }
+  console.log(schoolPop);
   return schoolPop;
 }
 
@@ -180,6 +180,7 @@ $(document).ready(function(){
   calculateDistance();
   assignPopToSchool();
   setColors();
+  census();
 });
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random - used for generating random integer

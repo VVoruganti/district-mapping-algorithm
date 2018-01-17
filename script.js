@@ -151,12 +151,10 @@ function census() {
   var schoolPop = [0,0,0,0,0,0];
   for( i = 0 ; i < model.length;i++){
     if(model[i].isSchool === false) {
-      schoolPop[model.assignedTo]  
+      schoolPop[model[i].assignedTo]  += model[i].population;
     }
   }
-
-
-
+  return schoolPop;
 }
 
 function setColors(){

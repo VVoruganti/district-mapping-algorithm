@@ -246,14 +246,14 @@ function calculateProximityforMinimum() {
         closestSchoolIndex[1] = schoolDistance[1][i];
     }
   }
-  console.log(index + " jadskfj");
-  console.log(closestSchoolIndex[1] + " ajsdf");
-  console.log(secondClosestSchoolIndex[1] + " qewr");
+  //console.log(index + " jadskfj");
+  //console.log(closestSchoolIndex[1] + " ajsdf");
+  //console.log(secondClosestSchoolIndex[1] + " qewr");
   return [index,closestSchoolIndex[1],secondClosestSchoolIndex[1]];
 }
 
 
-function optimizeforArea([minimum,first,second]) {
+function adjustforArea([minimum,first,second]) {
   var minimumIndex = schools[minimum];
   var comparison;
   var compArray = [];
@@ -266,17 +266,27 @@ function optimizeforArea([minimum,first,second]) {
     comparison = first;
   }
   compArray = schoolIndex[comparison];
-  console.log(compArray + " compArray");
+  //console.log(compArray + " compArray");
   for(i = 0; i < compArray.length; i++) {
     var temp = distanceBetween(schools[minimum],compArray[i]);
-    console.log ("temp " + temp );
+  //  console.log ("temp " + temp );
     distanceArray.push(temp);
 }
-  console.log(distanceArray);
+  //console.log(distanceArray);
   adjustment = distanceArray.indexOf(Math.min.apply(null,distanceArray));
-  console.log(adjustment + " adjustment");
+  //console.log(adjustment + " adjustment");
   model[compArray[adjustment]].assignedTo = minimum;
 
+}
+
+function optimize() {
+  while(standardDeviation(populations) > 10) {
+  console.log(standardDeviation(populations) + " -1");
+  adjustforArea(calculateProximityforMinimum());
+  census();
+  setColors();
+  console.log(standardDeviation(populations) + " -2")
+  }
 }
 
 $(document).ready(function(){
@@ -290,7 +300,8 @@ $(document).ready(function(){
   resolveTies();
   census();
   calculateProximityforMinimum();
-  
+  optimize();
+
 });
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random - used for generating random integer

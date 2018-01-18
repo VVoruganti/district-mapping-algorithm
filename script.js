@@ -1,7 +1,5 @@
 var model = [];
 var schools = [];
-var onesInt = [];
-var tensInt = [];
 var distanceTied = [];
 var populations = [];
 var schoolIndex = [[],[],[],[],[],[]];
@@ -25,6 +23,10 @@ function generateModel() {
     }
   }
 }
+
+
+var onesInt = [];
+var tensInt = [];
 
 function schoolList() {
   for(i = 0; i < 10; i++) {
@@ -124,7 +126,7 @@ function resolveTies() {
   }
   setColors();
 }
-//http://www.jstips.co/en/javascript/array-average-and-median/
+
 
 function assignPopToSchool() {
   for(i = 0; i< model.length; i++) {
@@ -132,8 +134,6 @@ function assignPopToSchool() {
     var temp = 100;
     var tempIndex = 0;
     var tie = [];
-
-
     if(model[i].isSchool == false) {
     //  console.log("calculation");
       for(j = 0; j < model[i].distances.length; j++) {
@@ -146,8 +146,6 @@ function assignPopToSchool() {
         }
       }
     }
-
-
     if(tie.length != 0) {
       for(k = 0; k < tie.length; k++) {
         if(tie[k] <= temp) {
@@ -156,13 +154,9 @@ function assignPopToSchool() {
         }
       }
     }
-
     if(checksum == true) {
       model[i].assignedTo = tempIndex;
-    //  console.log("success");
-      //console.log(tempIndex);
     }
-
   }
 
 
@@ -231,7 +225,7 @@ function calculateProximityforMinimum() {
       index = i;
     }
   }
-  //https://www.geeksforgeeks.org/to-find-smallest-and-second-smallest-element-in-an-array/
+
   for(i = 0; i < schools.length; i++) {
     if( i != index){
       schoolDistance[0].push(distanceBetween(schools[i],schools[index]));
@@ -246,9 +240,6 @@ function calculateProximityforMinimum() {
         closestSchoolIndex[1] = schoolDistance[1][i];
     }
   }
-  //console.log(index + " jadskfj");
-  //console.log(closestSchoolIndex[1] + " ajsdf");
-  //console.log(secondClosestSchoolIndex[1] + " qewr");
   return [index,closestSchoolIndex[1],secondClosestSchoolIndex[1]];
 }
 
@@ -280,7 +271,7 @@ function adjustforArea([minimum,first,second]) {
 }
 
 function optimize() {
-  while(standardDeviation(populations) > 10) {
+  while(standardDeviation(populations) > 15) {
   console.log(standardDeviation(populations) + " -1");
   adjustforArea(calculateProximityforMinimum());
   census();
@@ -303,5 +294,3 @@ $(document).ready(function(){
   optimize();
 
 });
-
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random - used for generating random integer

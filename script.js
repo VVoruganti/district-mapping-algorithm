@@ -74,14 +74,6 @@ function generateVisualModel() {
 
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
 
-function spreadSchools() {
-  for(i=0; i < schools.length; i++) {
-    for(j = 0; j <schools.length - 1; j ++ ) {
-
-    }
-  }
-}
-
 function calculateDistance() {
 
   for(i = 0; i < model.length; i++) {
